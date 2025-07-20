@@ -81,10 +81,10 @@ const questionGroups = [
         id: "enviornment",
         title: "4. What environment helps you focus best?",
         options: [
-          { label: "Quiet space with minimal distractions", value: "focused", image: "/images/concrete.png" },
-          { label: "Light background music or sounds", value: "creative", image: "/images/reflective.png" },
-          { label: "Around other people, collaborative", value: "social", image: "/images/abstract.png" },
-          { label: "It depends on my mood", value: "adaptable", image: "/images/active.png" },
+          { label: "Quiet space with minimal distractions", value: "silence", image: "/images/silence.png" },
+          { label: "Light background music or sounds", value: "white-noise", image: "/images/white-noise.png" },
+          { label: "Around other people, collaborative", value: "teamwork", image: "/images/teamwork.png" },
+          { label: "It depends on my mood", value: "adaptable", image: "/images/adaptable.png" },
         ],
       },
     ],
@@ -140,7 +140,7 @@ export default function LearningStyleQuiz() {
           {currentGroup.questions.map((q) => (
             <div key={q.id} className="mb-8">
               <p className="font-semibold mb-4 text-lg">{q.title}</p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pb-20">
                 {q.options.map((opt) => (
                   <div
                     key={opt.value}
