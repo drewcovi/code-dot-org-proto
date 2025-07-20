@@ -7,6 +7,7 @@ import AvatarForge from './AvatarForge';
 import { BrowserRouter, Routes, Route } from "react-router";
 import ComputationalThinkingGame from './ComputationalThinkingGame';
 import LearningStyleQuiz from './LearningStyleQuiz';
+import Dashboard from './Dashboard';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -17,9 +18,9 @@ function App() {
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<AvatarForge/>} />
-      {/* <Route path="/" element={<ComputationalThinkingGame/>} /> */}
+      <Route path="/dashboard" element={<Dashboard/>} />
       <Route path="/styles" element={<LearningStyleQuiz/>} />
-      <Route path="/journey" element={<QuestSelector/>} />
+      <Route path="/courses/python" element={<QuestSelector/>} />
       <Route path="/assessment" element={<ComputationalThinkingGame/>} />
     </Routes>
   </BrowserRouter>

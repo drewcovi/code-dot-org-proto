@@ -57,7 +57,6 @@ const catalog = {
     { name: "Hearing Aid", group: "assist-hearing", prompt: "hearing aid" }
   ],
   Clothing: [
-    { name: "T‑Shirt", group: "cloth-tee", prompt: "green t‑shirt" },
     { name: "Turtleneck", group: "cloth-turtleneck", prompt: "red turtleneck" }
   ],
   Pronouns: [
@@ -213,13 +212,17 @@ export default function AvatarForge() {
     <>
       {/* HEADER */}
       <Header title="Pick your CodeMate" resetSvg={true}>
+        
         {/* <div className="ml-auto text-sm text-gray-500 display-flex">Step 1 of 5</div> */}
       </Header>
 
       {/* BODY */}
+      <div className="p-8 border-b border-1 border-gray-800">
+            <p>Your CodeMate is your companion through your learning journey, you can decide to share them with your classmates as you work on group projects</p>
+      </div>
       <main className="flex flex-1 overflow-y-scroll">
         {/* CATEGORY NAV */}
-        <aside className="flex flex-col w-56 bg-white border-gray-200 p-4 overflow-y-auto">
+        <aside className="border-r border-gray-400 flex flex-col w-56 bg-white p-4 overflow-y-auto">
           <div className="grow-1 flex">
           {renderNav()}
           </div>
@@ -235,7 +238,7 @@ export default function AvatarForge() {
               {/* SKIN TONES */}
               <title>{avatarId}</title>
               {catalog["Skin Tone"].map((s) => (
-            <g isolation="isolate" key={s.group}>
+            <g isolation="isolate" key={s.group} className={isVisible(s.group) ? "" : "hidden"}>
                 <g id="Layer_1" data-name="Layer 1">
                 <g>
                     <path d="M187.47,131.92c.22-1.52.93-4.94,3.77-7.95,1.16-1.23,3.87-4.08,6.44-3.65,3.89.65,5.71,8.54,5.99,13.53.6,10.81-5.16,24.07-13.1,24.91-1.85.2-3.48-.32-4.66-.86.52-8.66,1.04-17.32,1.55-25.99Z" fill={s.color}/>

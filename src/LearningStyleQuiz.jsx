@@ -107,6 +107,12 @@ export default function LearningStyleQuiz() {
     setError("");
   };
 
+  const handleReset = () =>{
+    setAnswers({});
+    setStep(0);
+    setSubmitted(false);
+    // console.log('test')
+  }
   const handleNext = () => {
     const unanswered = currentGroup.questions.find((q) => !answers[q.id]);
     if (unanswered) {
@@ -136,6 +142,7 @@ export default function LearningStyleQuiz() {
       <main className="flex flex-1 overflow-y-scroll">
       {!submitted ? (
         <div className="p-5 flex-1 flex-col content-start">
+          {/* {step} */}
           {/* <h2 className="text-xl font-semibold mb-4">{currentGroup.title}</h2> */}
           {currentGroup.questions.map((q) => (
             <div key={q.id} className="mb-8">
@@ -160,15 +167,21 @@ export default function LearningStyleQuiz() {
           
         </div>
       ) : (
-        <div>
+        <div className="text-center flex flex-col grow-1 items-center content-center self-center">
+          <div className="w-100 flex flex-col bg-gray-200 p-12 rounded-xl">
           <h2 className="text-xl font-bold mb-4">Your Learning Profile</h2>
-          <ul className="list-disc list-inside space-y-1">
+          <ul className="list-inside space-y-1">
             {Object.entries(answers).map(([key, value]) => (
               <li key={key}>
                 <strong>{key.toUpperCase()}:</strong> {value.charAt(0).toUpperCase() + value.slice(1)}
               </li>
             ))}
           </ul>
+          <p className="my-5">With this information we can work to better match you during group activities and find ways to streamline your coursework.</p>
+          <button className="px-8 py-4 bg-indigo-600 text-white rounded-xl shadow bg-primary" onClick={()=>navigate('/dashboard')}>Continue to Dashboard</button>
+          <button className="px-8 my-4 py-4 border-1 bg-gray-100 rounded-xl" onClick={handleReset}>Start over</button>
+            
+          </div>
 
  {/* FOOTER ACTIONS */}
 
@@ -205,8 +218,7 @@ export default function LearningStyleQuiz() {
         </>
         ):(
           <>
-            <button className="px-8 py-4 bg-gray-200 rounded-xl text-sm" disabled>Do it again</button>
-            <button className="px-8 py-4 bg-indigo-600 text-white rounded-xl shadow text-sm bg-primary" onClick={()=>navigate('/journey')}>Next</button>
+            
           </>
         )
         }
