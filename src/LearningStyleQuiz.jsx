@@ -136,16 +136,16 @@ export default function LearningStyleQuiz() {
   return (
     <>
       
-      <Header title="Discover How You Learn Best">
+      <Header title="Help us get to know you" avatar={true}>
       </Header>
 
-      <main className="flex flex-1 overflow-y-scroll">
+      <main className="flex flex-1 overflow-y-scroll row-start-3 overflow-y-auto">
       {!submitted ? (
         <div className="p-5 flex-1 flex-col content-start">
           {/* {step} */}
           {/* <h2 className="text-xl font-semibold mb-4">{currentGroup.title}</h2> */}
           {currentGroup.questions.map((q) => (
-            <div key={q.id} className="mb-8">
+            <div key={q.id} className="mb-8 pb-20">
               <p className="font-semibold mb-4 text-lg">{q.title}</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pb-20">
                 {q.options.map((opt) => (
@@ -156,7 +156,7 @@ export default function LearningStyleQuiz() {
                     }`}
                     onClick={() => handleChange(q.id, opt.value)}
                   >
-                    <img src={opt.image} alt={opt.label} className="w-full h-64 object-cover mb-2" />
+                    <img src={opt.image} alt={opt.label} className="w-full h-64 object-cover mb-2 grayscale" />
                     <p className="text-center font-medium">{opt.label}</p>
                   </div>
                 ))}
@@ -168,20 +168,20 @@ export default function LearningStyleQuiz() {
         </div>
       ) : (
         <div className="text-center flex flex-col grow-1 items-center content-center self-center">
-          <div className="w-100 flex flex-col bg-gray-200 p-12 rounded-xl">
-          <h2 className="text-xl font-bold mb-4">Your Learning Profile</h2>
-          <ul className="list-inside space-y-1">
-            {Object.entries(answers).map(([key, value]) => (
-              <li key={key}>
-                <strong>{key.toUpperCase()}:</strong> {value.charAt(0).toUpperCase() + value.slice(1)}
-              </li>
-            ))}
-          </ul>
-          <p className="my-5">With this information we can work to better match you during group activities and find ways to streamline your coursework.</p>
-          <button className="px-8 py-4 bg-indigo-600 text-white rounded-xl shadow bg-primary" onClick={()=>navigate('/dashboard')}>Continue to Dashboard</button>
-          <button className="px-8 my-4 py-4 border-1 bg-gray-100 rounded-xl" onClick={handleReset}>Start over</button>
-            
-          </div>
+            <div className="w-100 flex flex-col bg-gray-200 p-12 rounded-xl self-center">
+            <h2 className="text-xl font-bold">Thank you</h2>
+            {/* <ul className="list-inside space-y-1">
+              {Object.entries(answers).map(([key, value]) => (
+                <li key={key}>
+                  <strong>{key.toUpperCase()}:</strong> {value.charAt(0).toUpperCase() + value.slice(1)}
+                </li>
+              ))}
+            </ul> */}
+            <p className="my-3">With this information we can work to better match you during group activities and find ways to streamline your coursework.</p>
+            <p className="mb-6">If you wish to change these answers at any time simply return to your profile</p>
+            <button className="px-8 py-4 text-white rounded-xl shadow bg-code-purple" onClick={()=>navigate('/dashboard')}>Continue to Dashboard</button>
+            <button className="px-8 my-4 py-4 border-1 bg-gray-100 rounded-xl" onClick={handleReset}>Start over</button>
+        </div>
 
  {/* FOOTER ACTIONS */}
 
@@ -199,20 +199,20 @@ export default function LearningStyleQuiz() {
         
         <button
           onClick={handleNext}
-          className="bg-blue-600 text-white px-8 py-4 rounded-xl hover:bg-blue-700">
+          className="bg-code-purple text-white px-8 py-4 rounded-xl">
           {step === questionGroups.length - 1 ? "Submit" : "Next"}
         </button>
         </>)
         : !submitted ? (<>
             <button
               className="px-8 py-4 text-white rounded-xl shadow bg-gray-600"
-              onClick={()=>navigate('/')}>
+              onClick={()=>navigate('/styles-intro')}>
               Back
             </button>
             {error && <p className="text-red-600 font-medium mb-2">{error}</p>}
             <button
             onClick={handleNext}
-            className="bg-blue-600 text-white px-8 py-4 rounded-xl hover:bg-blue-700">
+            className="bg-code-purple text-white px-8 py-4 rounded-xl">
               {step === questionGroups.length - 1 ? "Submit" : "Next"}
           </button>
         </>

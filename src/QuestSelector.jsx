@@ -32,19 +32,22 @@ const quests = [
         description: "Solve real-world problems with code.",
         icon: "🌍",
         objective: "Analyze issues and prototype civic technology solutions.",
-        finalProject: "Build a campaign site, chatbot, or data visualization for social impact."
+        finalProject: "Build a campaign site, chatbot, or data visualization for social impact.",
+        map:"/images/map-social.png"
     }, {
         title: "Science & Nature",
         description: "Explore the logic behind natural phenomena.",
         icon: "🧬",
         objective: "Model scientific processes and patterns using code.",
-        finalProject: "Simulate a natural system or visualize scientific data."
+        finalProject: "Simulate a natural system or visualize scientific data.",
+        map:"/images/map-nature.png"
     }, {
         title: "Everyday Tech",
         description: "Discover the tech behind your daily apps.",
         icon: "📱",
         objective: "Demystify the algorithms behind notifications, feeds, and recommendations.",
-        finalProject: "Prototype a smart feature like a to-do reminder or custom alert system."
+        finalProject: "Prototype a smart feature like a to-do reminder or custom alert system.",
+        map:"/images/map-tech.png"
     }
 ];
 
@@ -72,12 +75,6 @@ const ctPillars = [
     }
 ];
 
-// export default function CodeDJJourneySummary() {   return (     <div
-// className="p-6 space-y-8">       {levels.map((lvl, idx) => (         <div
-// key={idx} className="bg-white rounded-md shadow p-4">           <h2
-// className="text-xl font-bold">{lvl.title}</h2>           <p
-// className="text-gray-700 mt-1">{lvl.scenario}</p>         </div>       ))}
-//  </div>   ); }
 
 export default function QuestSelector() {
     let navigate = useNavigate();
@@ -89,8 +86,8 @@ export default function QuestSelector() {
     // let selected = quests[1].title;
 
     return ( <>
-    <Header title="Choose your course theme"></Header>
-    <div className="p-8 border-b border-1 border-gray-800">
+    <Header title="How would you like to learn Python Programming?" avatar={true}></Header>
+    <div className="p-8 border-b border-gray-800">
             <p className="text-muted-foreground">
                 Pick a quest to explore your interests while building computational thinking
                 skills!
@@ -151,7 +148,7 @@ export default function QuestSelector() {
         <button
         className="px-8 py-4 rounded-xl bg-blue-500 text-white"
         onClick={() => {
-        navigate("/assessment")
+        navigate("/unit-overview")
     }}>Start your Journey</button>
                 </Footer > </ >);
 }
