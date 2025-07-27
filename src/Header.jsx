@@ -16,7 +16,7 @@ export default function Footer({title, resetSvg, avatar, children}){
         {children}
         {avatar && (
          svg && (
-        <span onClick={() => navigate('/')} className="ml-6 flex h-20 w-20 object-fit border-gray-800 bg-blue-200 border rounded-full overflow-hidden fixed bottom-30 z-200 right-5 shadow-md">
+        <span onClick={() => navigate('/')} className="ml-6 flex h-30 w-30 object-fit border-gray-800 bg-blue-200 border rounded-full overflow-hidden fixed bottom-30 z-200 right-5 shadow-md">
             {parse(svg)}
         </span>
         )

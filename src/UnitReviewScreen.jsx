@@ -80,15 +80,15 @@ export default function UnitReviewScreen() {
             <main className = "py-12 row-start-3 py-10 grid overflow-y-scroll bg-gray-100" >
 
             
-            <Accordion collapsible type="single" defaultValue="2" className=""> 
+            <Accordion collapsible type="single" defaultValue={2}> 
       {units.map((unit) => (
-        <Card key={unit.id} className='w-auto m-4 p-0 overflow-hidden'>
+        <Card key={unit.id} className='w-auto mx-4 my-6 p-0 overflow-hidden shadow-none'>
           <CardContent className="space-y-4 p-0">
             <div onClick={()=>{handleNext(unit.href)}} className={unit.progress === 100 ? headerClasses+' bg-gray-400':headerClasses+' bg-code-teal'}>
               <div className=" md:w-3/4">
                 <h3 className="text-xl font-bold mb-1">{unit.title}</h3>
                 <p className="text-sm mb-2">{unit.subtitle}</p>
-                <Progress value={unit.progress} className={unit.progress===100?loadingBarClasses:loadingBarClasses+' [&>div]:bg-code-purple'} />
+                <Progress value={unit.progress} className={unit.progress===100?loadingBarClasses+' [&>div]:bg-white':loadingBarClasses+' [&>div]:bg-code-purple'} />
               </div>
               {unit.progress < 100 &&
               <div className="p-6 md:w-1/4 flex md:justify-end w-full">
@@ -100,7 +100,7 @@ export default function UnitReviewScreen() {
               </div>
 }
             </div>
-            <AccordionItem value={'item'+unit.id} className="">
+            <AccordionItem value={unit.id} className="">
             <AccordionTrigger className="m-0 cursor-pointer p-6 text-lg font-semibold text-code-teal">
                 View Lessons
             </AccordionTrigger>

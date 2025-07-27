@@ -145,7 +145,7 @@ export default function LearningStyleQuiz() {
           {/* {step} */}
           {/* <h2 className="text-xl font-semibold mb-4">{currentGroup.title}</h2> */}
           {currentGroup.questions.map((q) => (
-            <div key={q.id} className="mb-8 pb-20">
+            <div key={q.id} className="mb-8 pb-30">
               <p className="font-semibold mb-4 text-lg">{q.title}</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pb-20">
                 {q.options.map((opt) => (
@@ -156,7 +156,7 @@ export default function LearningStyleQuiz() {
                     }`}
                     onClick={() => handleChange(q.id, opt.value)}
                   >
-                    <img src={opt.image} alt={opt.label} className="w-full h-64 object-cover mb-2 grayscale" />
+                    <img src={opt.image} alt={opt.label} className="w-full h-64 object-cover mb-2 sepia" />
                     <p className="text-center font-medium">{opt.label}</p>
                   </div>
                 ))}

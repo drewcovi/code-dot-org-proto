@@ -11,7 +11,7 @@ export default function LearningStyleIntro() {
                 {/* <small className="text-sm">You can change this later</small> */}
             </Header>
             <div className="row-start-3 grid grid-cols-12 text-left flex flex-col grow-1 center items-center content-center grow-1 overflow-y-scroll">
-                <div className="my-10 col-span-8 col-start-3 flex flex-col bg-gray-200 p-12 rounded-xl self-center">
+                <div className="mb-30 col-span-8 col-start-3 flex flex-col bg-gray-200 p-12 rounded-xl self-center">
                     {/* <h2 className="text-xl font-bold"></h2> */}
                     <p className="my-3">To get to know you a little better, we have a few quick questions about your style and preferences.</p>
                     <p className="my-3">With this information we can work better to match you during group activites and work with your teacher to streamline your experience.</p>

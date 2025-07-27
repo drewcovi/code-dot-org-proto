@@ -221,7 +221,7 @@ export default function AvatarForge() {
       </Header>
 
       {/* BODY */}
-      <div className="p-8 border-b border-1 border-gray-800">
+      <div className="p-8 border-b border-b-1 border-gray-300">
             <p>Your CodeMate is your companion through your learning journey, you can decide to share them with your classmates as you work on group projects</p>
       </div>
       <main className="flex flex-1 overflow-y-scroll">
@@ -982,7 +982,7 @@ export default function AvatarForge() {
           </div>
           <div className="space-x-2">
             {/* <button className="px-4 py-2 bg-gray-200 rounded-xl text-sm" disabled>Back</button> */}
-            <button className="px-8 py-4 bg-indigo-600 text-white rounded-xl shadow bg-code-purple" onClick={()=>navigate('/styles-intro')}>Next</button>
+            <button className="px-8 py-4 text-white rounded-xl shadow bg-code-purple" onClick={()=>navigate('/styles-intro')}>Next</button>
           </div>
           </>
       </Footer>
@@ -1002,7 +1002,7 @@ export default function AvatarForge() {
             />
             <div className="flex justify-end space-x-2">
               <button onClick={() => setShowModal(false)} className="px-3 py-2 text-sm bg-gray-200 rounded-lg">Cancel</button>
-              <button onClick={handleSaveKey} className="px-3 py-2 text-sm bg-indigo-600 text-white rounded-lg">Save</button>
+              <button onClick={handleSaveKey} className="px-3 py-2 text-sm bg-code-purple text-white rounded-lg">Save</button>
             </div>
           </div>
         </div>

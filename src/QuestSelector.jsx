@@ -106,7 +106,7 @@ export default function QuestSelector() {
                         ? "border-2 border-blue-500 bg-blue-100"
                         : ""}`}>
                         <CardContent className="p-4">
-                            <div className="text-5xl mb-2">{quest.icon}</div>
+                            <div className="text-5xl mb-2 sepia">{quest.icon}</div>
                             <h2 className="text-xl font-semibold mb-1">{quest.title}</h2>
                             <p className="text-sm text-muted-foreground">{quest.description}</p>
                         </CardContent>
@@ -137,16 +137,16 @@ export default function QuestSelector() {
                         </CardContent>
                     </Card>
                 ))} */}
-                <img src={selectedQuest.map}/>
+                <img className="sepia" src={selectedQuest.map}/>
             </div>
 
         </div>
     )}
     </main>
     <Footer>
-        <button className="px-8 py-4 rounded-xl text-white bg-gray-400" onClick={() => navigate("/dashboard ")}>Back</button>
+        <button className="px-8 py-4 rounded-xl text-white bg-gray-500" onClick={() => navigate("/dashboard ")}>Back</button>
         <button
-        className="px-8 py-4 rounded-xl bg-blue-500 text-white"
+        className="px-8 py-4 rounded-xl bg-code-teal text-white"
         onClick={() => {
         navigate("/unit-overview")
     }}>Start your Journey</button>
