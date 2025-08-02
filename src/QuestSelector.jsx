@@ -106,7 +106,7 @@ export default function QuestSelector() {
                         ? "border-2 border-blue-500 bg-blue-100"
                         : ""}`}>
                         <CardContent className="p-4">
-                            <div className="text-5xl mb-2 sepia">{quest.icon}</div>
+                            <div className="text-5xl mb-2 grayscale">{quest.icon}</div>
                             <h2 className="text-xl font-semibold mb-1">{quest.title}</h2>
                             <p className="text-sm text-muted-foreground">{quest.description}</p>
                         </CardContent>
@@ -137,7 +137,7 @@ export default function QuestSelector() {
                         </CardContent>
                     </Card>
                 ))} */}
-                <img className="sepia" src={selectedQuest.map}/>
+                <img className="grayscale" src={selectedQuest.map}/>
             </div>
 
         </div>

@@ -156,7 +156,7 @@ export default function LearningStyleQuiz() {
                     }`}
                     onClick={() => handleChange(q.id, opt.value)}
                   >
-                    <img src={opt.image} alt={opt.label} className="w-full h-64 object-cover mb-2 sepia" />
+                    <img src={opt.image} alt={opt.label} className="w-full h-64 object-cover mb-2 grayscale" />
                     <p className="text-center font-medium">{opt.label}</p>
                   </div>
                 ))}

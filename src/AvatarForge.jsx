@@ -5,10 +5,19 @@
 // your React app. TailwindCSS should already be configured globally
 // (e.g. via PostCSS or CDN in index.html).
 
-import React, { useState, useEffect } from "react";
+import React, { setState, useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router";
 import Footer from "./Footer";
 import Header from "./Header";
+import {
+  ColorPicker,
+  ColorPickerAlpha,
+  ColorPickerEyeDropper,
+  ColorPickerFormat,
+  ColorPickerHue,
+  ColorPickerOutput,
+  ColorPickerSelection,
+} from '@/components/ui/shadcn-io/color-picker';
 
 // ================= CATALOG =============================
 const catalog = {
@@ -19,7 +28,8 @@ const catalog = {
     { name: "Brown", group: "skin-brown", prompt: "african american skintone", color: "#8D5524" },
     { name: "Dark", group: "skin-dark", prompt: "african (black) skintone", color: "#5B3C24" },
     { name: "Purple", group: "skin-purple", prompt: "purple skintone", color: "#A020F0" },
-    { name: "Green", group: "skin-green", prompt: "green skintone", color: "#00FF00" }
+    { name: "Green", group: "skin-green", prompt: "green skintone", color: "#00FF00" },
+    // { name: "Custom", group: "skin-custom", prompt: "skintone", color: "#FF0000"}
   ],
   "Hair & Headwear": [
     { name: "None", group: "hair-none", prompt: "bald" },
@@ -111,6 +121,7 @@ export default function AvatarForge() {
   // });
   const [loading, setLoading] = useState(false);
   const [aiUrl, setAiUrl] = useState("");
+  const [color, setColor] = useState('#FF0000');
   const [apiKey, setApiKey] = useState(() => sessionStorage.getItem("OPENAI_API_KEY") || "");
   const [showModal, setShowModal] = useState(false);
 
@@ -123,15 +134,9 @@ export default function AvatarForge() {
   const saveCodemate = () => {
     var s = new XMLSerializer();
     var str = s.serializeToString(document.getElementById('codemate'));
-    // console.log(str);
     localStorage.setItem('codemate',str);
-    // setCodemate(str);
-
-    // console.log(document.getElementById('codemate').getAttribute('title'))
-    // console.log('saving')
   }
 
-  // saveCodemate();
 
   const handleRandomize = () => {
     setSelections(randomizeSelections());
@@ -193,10 +198,25 @@ export default function AvatarForge() {
   const avatarStyles ={
     background: 'gray'
   }
+
+  const handleColor = (newColor) => {
+    console.log(color, newColor);
+    if(newColor !== color){
+      setColor(newColor);
+    }
+    
+  };
   
   const renderOptions = () => (
-    <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-4 w-full max-w-4xl">
-      {catalog[currentCat].map((opt) => (
+    <>
+      {/* {(currentCat === 'Skin Tone') ? (
+        <ColorPicker className="relative rounded-md border" value={color} onChange={handleColor}>
+          <ColorPickerSelection />
+          <ColorPickerHue />
+      </ColorPicker>
+      ):( */}
+      <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-4 w-full max-w-4xl">
+       {catalog[currentCat].map((opt) => (
         <button
           key={opt.group}
           onClick={() => handleSelect(currentCat, opt)}
@@ -205,7 +225,9 @@ export default function AvatarForge() {
           <span>{opt.name}</span>
         </button>
       ))}
-    </div>
+      </div>
+      {/* )} */}
+    </>
   );
 
   // SVG layer visibility helper
@@ -214,6 +236,7 @@ export default function AvatarForge() {
   return (
     
     <>
+      <title>Pick your CodeMate</title>
       {/* HEADER */}
       <Header title="Pick your CodeMate" resetSvg={true}>
         
@@ -234,7 +257,7 @@ export default function AvatarForge() {
         </aside>
 
         {/* WORKSPACE */}
-        <section className="flex-1 flex flex-col items-center justify-top p-6 space-y-6 overflow-y-auto">
+        <section className="flex-1 pb-40 flex flex-col items-center justify-top p-6 space-y-6 overflow-y-auto">
           {/* AVATAR PREVIEW */}
           <div className="relative w-64 h-64 select-none rounded-full" style={avatarStyles}>
             {/* SVG */}
