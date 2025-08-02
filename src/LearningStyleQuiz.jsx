@@ -103,7 +103,11 @@ export default function LearningStyleQuiz() {
   const currentGroup = questionGroups[step];
 
   const handleChange = (id, value) => {
-    setAnswers({ ...answers, [id]: value });
+    const currentAnswers = answers[id] || [];
+    const newAnswers = currentAnswers.includes(value)
+      ? currentAnswers.filter(answer => answer !== value)
+      : [...currentAnswers, value];
+    setAnswers({ ...answers, [id]: newAnswers });
     setError("");
   };
 
@@ -114,7 +118,7 @@ export default function LearningStyleQuiz() {
     // console.log('test')
   }
   const handleNext = () => {
-    const unanswered = currentGroup.questions.find((q) => !answers[q.id]);
+    const unanswered = currentGroup.questions.find((q) => !answers[q.id] || answers[q.id].length === 0);
     if (unanswered) {
       setError("Please select an option before continuing.");
       return;
@@ -152,7 +156,7 @@ export default function LearningStyleQuiz() {
                   <div
                     key={opt.value}
                     className={`border rounded-xl pb-4 overflow-hidden cursor-pointer hover:shadow-lg transition ${
-                      answers[q.id] === opt.value ? "border-blue-500 ring-2 ring-blue-300 bg-blue-200" : "border-gray-300"
+                      (answers[q.id] || []).includes(opt.value) ? "border-blue-500 ring-2 ring-blue-300 bg-blue-200" : "border-gray-300"
                     }`}
                     onClick={() => handleChange(q.id, opt.value)}
                   >
