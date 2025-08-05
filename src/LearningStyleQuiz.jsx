@@ -33,6 +33,11 @@ const questionGroups = [
             value: 'kinesthetic',
             image: '/images/kinesthetic.png',
           },
+          {
+            label: 'Other (please specify)',
+            value: 'other',
+            isTextInput: true,
+          },
         ],
       },
     ],
@@ -74,6 +79,11 @@ const questionGroups = [
             label: 'Like leading or helping others',
             value: 'participant',
             image: '/images/participant.png',
+          },
+          {
+            label: 'Other (please specify)',
+            value: 'other',
+            isTextInput: true,
           },
         ],
       },
@@ -138,6 +148,11 @@ const questionGroups = [
             value: 'naturalistic',
             image: '/images/naturalistic.png',
           },
+          {
+            label: 'Other (please specify)',
+            value: 'other',
+            isTextInput: true,
+          },
         ],
       },
     ],
@@ -170,6 +185,11 @@ const questionGroups = [
             value: 'adaptable',
             image: '/images/adaptable.png',
           },
+          {
+            label: 'Other (please specify)',
+            value: 'other',
+            isTextInput: true,
+          },
         ],
       },
     ],
@@ -179,6 +199,7 @@ const questionGroups = [
 export default function LearningStyleQuiz() {
   let navigate = useNavigate();
   const [answers, setAnswers] = useState({});
+  const [textInputs, setTextInputs] = useState({});
   const [step, setStep] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
@@ -194,8 +215,24 @@ export default function LearningStyleQuiz() {
     setError('');
   };
 
+  const handleTextInputChange = (id, value) => {
+    setTextInputs({ ...textInputs, [id]: value });
+    const currentAnswers = answers[id] || [];
+    if (value.trim()) {
+      const newAnswers = currentAnswers.includes('other')
+        ? currentAnswers
+        : [...currentAnswers, 'other'];
+      setAnswers({ ...answers, [id]: newAnswers });
+    } else {
+      const newAnswers = currentAnswers.filter((answer) => answer !== 'other');
+      setAnswers({ ...answers, [id]: newAnswers });
+    }
+    setError('');
+  };
+
   const handleReset = () => {
     setAnswers({});
+    setTextInputs({});
     setStep(0);
     setSubmitted(false);
     // console.log('test')
@@ -235,22 +272,41 @@ export default function LearningStyleQuiz() {
                 <p className="font-semibold mb-4 text-lg">{q.title}</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pb-20">
                   {q.options.map((opt) => (
-                    <div
-                      key={opt.value}
-                      className={`border rounded-xl pb-4 overflow-hidden cursor-pointer hover:shadow-lg transition ${
-                        (answers[q.id] || []).includes(opt.value)
-                          ? 'border-blue-500 ring-2 ring-blue-300 bg-blue-200'
-                          : 'border-gray-300'
-                      }`}
-                      onClick={() => handleChange(q.id, opt.value)}
-                    >
-                      <img
-                        src={opt.image}
-                        alt={opt.label}
-                        className="w-full h-64 object-cover mb-2 grayscale"
-                      />
-                      <p className="text-center font-medium">{opt.label}</p>
-                    </div>
+                    opt.isTextInput ? (
+                      <div
+                        key={opt.value}
+                        className={`border rounded-xl p-4 ${
+                          (answers[q.id] || []).includes(opt.value)
+                            ? 'border-blue-500 ring-2 ring-blue-300 bg-blue-200'
+                            : 'border-gray-300'
+                        }`}
+                      >
+                        <p className="text-center font-medium mb-3">{opt.label}</p>
+                        <textarea
+                          className="w-full p-2 border border-gray-300 rounded resize-none h-24"
+                          placeholder="Please describe your preferred learning style..."
+                          value={textInputs[q.id] || ''}
+                          onChange={(e) => handleTextInputChange(q.id, e.target.value)}
+                        />
+                      </div>
+                    ) : (
+                      <div
+                        key={opt.value}
+                        className={`border rounded-xl pb-4 overflow-hidden cursor-pointer hover:shadow-lg transition ${
+                          (answers[q.id] || []).includes(opt.value)
+                            ? 'border-blue-500 ring-2 ring-blue-300 bg-blue-200'
+                            : 'border-gray-300'
+                        }`}
+                        onClick={() => handleChange(q.id, opt.value)}
+                      >
+                        <img
+                          src={opt.image}
+                          alt={opt.label}
+                          className="w-full h-64 object-cover mb-2 grayscale"
+                        />
+                        <p className="text-center font-medium">{opt.label}</p>
+                      </div>
+                    )
                   ))}
                 </div>
               </div>

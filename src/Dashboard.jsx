@@ -9,7 +9,7 @@ const courses = [
     title: 'Python Programming',
     description: 'Text-based coding for real-world applications.',
     modal: ' ',
-    progress: 0,
+    progress: 30,
     url: '/courses/python',
   },
   {

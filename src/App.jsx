@@ -11,6 +11,7 @@ import Dashboard from './Dashboard';
 import LearningStyleIntro from './LearningStyleIntro';
 import UnitReviewScreen from './UnitReviewScreen';
 import EndOnboarding from './EndOnboarding';
+import TeamProject from './TeamProject';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -20,13 +21,14 @@ function App() {
     <div className="h-screen font-sans text-gray-800 flex flex-col">
     <nav className="flex-row bg-code-teal text-white flex min-h-12 items-center px-6 py-4">
     </nav>
-    <main className="flex flex-1 overflow-y-scroll row-start-3 overflow-y-auto grid grid-cols-[auto] grid-rows-[auto_1fr]">
+    <main className="flex flex-1 overflow-y-scroll overflow-y-auto grid grid-cols-[auto] grid-rows-[auto_1fr]">
       
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<AvatarForge/>} />
       <Route path="/dashboard" element={<Dashboard/>} />
       <Route path="/end" element={<EndOnboarding/>}/>
+      <Route path="/project" element={<TeamProject/>}/>
       <Route path="/styles-intro" element={<LearningStyleIntro/>}/>
       <Route path="/styles" element={<LearningStyleQuiz/>} />
       <Route path="/courses/python" element={<QuestSelector/>} />
