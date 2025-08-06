@@ -21,7 +21,7 @@ function App() {
     <div className="h-screen font-sans text-gray-800 flex flex-col">
     <nav className="flex-row bg-code-teal text-white flex min-h-12 items-center px-6 py-4">
     </nav>
-    <main className="flex flex-1 overflow-y-scroll overflow-y-auto grid grid-cols-[auto] grid-rows-[auto_1fr]">
+    <main className="bg-gray-100 flex flex-1 overflow-y-scroll overflow-y-auto grid grid-cols-[auto] grid-rows-[auto_1fr]">
       
     <BrowserRouter>
     <Routes>

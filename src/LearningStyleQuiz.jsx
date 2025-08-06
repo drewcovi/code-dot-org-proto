@@ -242,7 +242,9 @@ export default function LearningStyleQuiz() {
       (q) => !answers[q.id] || answers[q.id].length === 0
     );
     if (unanswered) {
+      console.log('unanswered')
       setError('Please select an option before continuing.');
+      console.log(error);
       return;
     }
     if (step < questionGroups.length - 1) {
@@ -348,8 +350,9 @@ export default function LearningStyleQuiz() {
             {/* FOOTER ACTIONS */}
           </div>
         )}
+      {!submitted && 
       <Footer className="">
-        {!submitted && step !== 0 ? (
+        {step !== 0 ? (
           <>
             <button
               onClick={handleBack}
@@ -362,7 +365,8 @@ export default function LearningStyleQuiz() {
             >
               Back
             </button>
-
+            {error && <p className="text-red-600 font-medium mb-2">{error}</p>}
+            
             <button
               onClick={handleNext}
               className="bg-code-purple text-white px-8 py-4 rounded-xl"
@@ -390,6 +394,7 @@ export default function LearningStyleQuiz() {
           <></>
         )}
       </Footer>
+      }
     </>
   );
 }

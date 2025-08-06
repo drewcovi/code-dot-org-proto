@@ -10,7 +10,7 @@ const courses = [
     description: 'Text-based coding for real-world applications.',
     modal: ' ',
     progress: 30,
-    url: '/courses/python',
+    url: '/unit-overview',
   },
   {
     title: 'Intro to Computer Science',
@@ -32,7 +32,7 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const [selectedCourse, setSelectedCourse] = useState(null);
   const handleCourseSelection = (course) => {
-    if (course.url === '/courses/python') {
+    if (course.url === '/unit-overview') {
       navigate(course.url);
     } else {
       setSelectedCourse(course);
@@ -42,14 +42,24 @@ export default function Dashboard() {
     <>
       <title>Dashboard</title>
       {/* <Header title="My Dashboard"></Header> */}
-      <div className="row-start-2 grid grid-cols-subgrid grid-rows-[auto_1fr] gap-x-10 gap-y-6 bg-gray-100 p-6 font-sans md:grid-cols-8 lg:grid-cols-12">
-        <h2 className="justify-content order-first col-span-8 row-start-1 flex content-center text-3xl font-semibold lg:col-span-12">
-          <span className="flex grow-1 items-center">My Courses</span>
-          <span className="object-fit ml-6 flex h-20 w-20 overflow-hidden rounded-full border border-gray-800 bg-blue-200 shadow-md">
+      <Header title="Dashboard" avatar={true}>
+          {/* <span className="object-fit ml-6 flex h-20 w-20 overflow-hidden rounded-full border border-gray-800 bg-blue-200 shadow-md">
             {parse(svg)}
-          </span>
-        </h2>
-        <div className="order-1 grid gap-6 md:col-span-4 md:grid-cols-1 lg:col-span-8 lg:grid-cols-2">
+          </span> */}
+      </Header>
+      <div className="grid grid-cols-subgrid grid-rows-[auto_auto] gap-x-10 gap-y-6 bg-gray-100 p-6 font-sans md:grid-cols-8 lg:grid-cols-12">
+        
+        
+        <div className="row-start-1 grid-rows-[auto] order-1 grid gap-6 md:col-span-4 md:grid-cols-1 lg:col-span-8 lg:grid-cols-2">
+        <div className="px-6 py-3 flex items-center justify-between bg-white border-1 border-code-teal order-0 row-start-1 col-span-full rounded-xl overflow-hidden">
+            <h3 className="code-tealobject-cover text-xl font-bold">
+                Resume Python Programming
+            </h3>
+            <a className="bg-code-purple rounded-xl border-1 px-5 py-3 text-white"
+            href="/unit-overview">
+                Continue
+              </a>
+        </div>
           {' '}
           {courses.map((course, idx) => (
             <div
