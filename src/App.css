@@ -7,7 +7,24 @@
   --color-code-teal: #0093a4;
   --color-code-purple: #8c52ba;
 }
-
+h1{
+  font-size: var(--text-3xl);
+}
+h2{
+  font-size: var(--text-2xl);
+}
+p{
+  margin: var(--text-lg) 0;
+  font-size: var(--text-lg);
+}
+ul{
+  list-style:disc;
+  font-size: var(--text-l);
+  padding-left: calc(var(--spacing)*6);
+  li{
+    margin: .5rem 0;
+  }
+}
 @custom-variant dark (&:is(.dark *));
 #root {
   /* max-width: 1280px; */

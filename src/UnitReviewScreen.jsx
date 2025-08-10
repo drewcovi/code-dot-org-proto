@@ -92,6 +92,7 @@ export default function UnitReviewScreen() {
                     </p>
             </div> */}
       <main className="row-start-2 bg-gray-200">
+      <h2 className="mx-10 my-6">Units remaining</h2>
         <Accordion collapsible type="single" defaultValue={2}>
           {units.map((unit) => ( (unit.progress < 100) &&
             <Card
@@ -169,7 +170,7 @@ export default function UnitReviewScreen() {
               </CardContent>
             </Card>
           ))}
-          <h2>Complete</h2>
+          <h2 className="mx-10">Complete</h2>
           {units.map((unit) => ( (unit.progress == 100) &&
           <Card
           key={unit.id}

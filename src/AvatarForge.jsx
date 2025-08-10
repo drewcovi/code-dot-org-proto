@@ -87,6 +87,21 @@ export default function AvatarForge() {
         group: 'hair-short-dreads',
         prompt: 'short dreadlocs',
       },
+      {
+        name: 'Long Blonde Hair',
+        group: 'hair-long-blonde',
+        prompt: 'long blonde hair',
+      },
+      {
+        name: 'Long Brown Hair',
+        group: 'hair-long-brown',
+        prompt: 'long brown hair',
+      },
+      {
+        name: 'Long Black Hair',
+        group: 'hair-long-black',
+        prompt: 'long black hair',
+      },
       { name: 'Short', group: 'hair-short', prompt: 'short straight hair' },
       { name: 'Curly', group: 'hair-curly', prompt: 'curly hair' },
       { name: 'Afro', group: 'hair-afro', prompt: 'afro hair' },
@@ -207,7 +222,7 @@ export default function AvatarForge() {
   });
   const handleGenerate = async () => {
     if (!apiKey) {
-      // setShowModal(true);
+      setShowModal(true);
       return;
     }
     setLoading(true);
@@ -251,7 +266,7 @@ export default function AvatarForge() {
       {categories.map((cat) => (
         <button
           key={cat}
-          className={`block w-full text-left px-3 py-2 rounded-lg ${
+          className={`block w-full rounded-lg px-3 py-2 text-left ${
             currentCat === cat
               ? 'bg-indigo-100 font-medium'
               : 'hover:bg-gray-100'
@@ -271,36 +286,35 @@ export default function AvatarForge() {
     if (currentCat === 'Skin Tone') {
       return (
         <>
-          <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-4 w-full max-w-4xl">
+          <div className="grid w-full max-w-4xl grid-cols-3 gap-4 sm:grid-cols-4 lg:grid-cols-6">
             {catalog[currentCat].map((opt) => (
               <button
                 key={opt.group}
                 onClick={() => handleSelect(currentCat, opt)}
-                className={`flex flex-col items-center justify-center border rounded-lg p-2 text-xs space-y-1 ${
+                className={`flex flex-col items-center justify-center space-y-1 rounded-lg border p-2 text-xs ${
                   selections[currentCat].group === opt.group
                     ? 'border-indigo-600 bg-indigo-50'
                     : 'hover:bg-gray-50'
                 }`}
               >
                 <div
-                  className="w-8 h-8 rounded-full border border-gray-300"
+                  className="h-8 w-8 rounded-full border border-gray-300"
                   style={{ backgroundColor: opt.color }}
                 ></div>
                 <span>{opt.name}</span>
-                {opt.name === "Custom" &&
-                <input
-                type="color"
-                value={color}
-                onChange={(e) => {
-                  setColor(e.target.value);
-                  handleColorChange(e.target.value);
-                }}
-                className="rounded-lg cursor-pointer h-16 w-16 rounded-xl"
-              />
-              }
+                {opt.name === 'Custom' && (
+                  <input
+                    type="color"
+                    value={color}
+                    onChange={(e) => {
+                      setColor(e.target.value);
+                      handleColorChange(e.target.value);
+                    }}
+                    className="h-16 w-16 cursor-pointer rounded-lg rounded-xl"
+                  />
+                )}
               </button>
             ))}
-            
           </div>
         </>
       );
@@ -308,12 +322,12 @@ export default function AvatarForge() {
 
     return (
       <>
-        <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-4 w-full max-w-4xl">
+        <div className="grid w-full max-w-4xl grid-cols-3 gap-4 sm:grid-cols-4 lg:grid-cols-6">
           {catalog[currentCat].map((opt) => (
             <button
               key={opt.group}
               onClick={() => handleSelect(currentCat, opt)}
-              className={`flex flex-col items-center justify-center border rounded-lg p-2 text-xs space-y-1 ${
+              className={`flex flex-col items-center justify-center space-y-1 rounded-lg border p-2 text-xs ${
                 selections[currentCat].group === opt.group
                   ? 'border-indigo-600 bg-indigo-50'
                   : 'hover:bg-gray-50'
@@ -343,26 +357,26 @@ export default function AvatarForge() {
       <title>Pick your CodeMate</title>
       {/* HEADER */}
       <Header title="Pick your CodeMate" resetSvg={true}>
-        <p>
+        {/* <p>
           Your CodeMate is your companion through your learning journey, you can
           decide to share them with your classmates as you work on group
           projects
-        </p>
+        </p> */}
       </Header>
 
       {/* BODY */}
-      
+
       <main className="flex flex-1">
         {/* CATEGORY NAV */}
-        <aside className="border-r border-gray-400 flex flex-col w-56 bg-white p-4 overflow-y-auto">
-          <div className="grow-1 flex">{renderNav()}</div>
+        <aside className="flex w-56 flex-col overflow-y-auto border-r border-gray-400 bg-white p-4">
+          <div className="flex grow-1">{renderNav()}</div>
         </aside>
 
         {/* WORKSPACE */}
-        <section className="flex-1 pb-40 flex flex-col items-center justify-top p-6 space-y-6 overflow-y-auto">
+        <section className="justify-top flex flex-1 flex-col items-center space-y-6 overflow-y-auto p-6 pb-40">
           {/* AVATAR PREVIEW */}
           <div
-            className="relative w-64 h-64 select-none rounded-full"
+            className="relative h-64 w-64 rounded-full select-none"
             style={avatarStyles}
           >
             <Avatar catalog={catalog} isVisible={isVisible} />
@@ -372,16 +386,16 @@ export default function AvatarForge() {
               <img
                 src={aiUrl}
                 alt="AI Avatar"
-                className="absolute inset-0 w-full h-full object-cover"
+                className="absolute inset-0 h-full w-full object-cover"
               />
             )}
             {/* PRONOUN TAG */}
-            <div className="absolute -right-3 -bottom-3 bg-indigo-600 text-white text-[10px] px-2 py-0.5 rounded-full shadow">
+            <div className="absolute -right-3 -bottom-3 rounded-full bg-indigo-600 px-2 py-0.5 text-[10px] text-white shadow">
               {selections['Pronouns'].name}
             </div>
             {/* LOADER */}
             {loading && (
-              <div className="absolute inset-0 flex items-center justify-center bg-white/70 rounded-full">
+              <div className="absolute inset-0 flex items-center justify-center rounded-full bg-white/70">
                 <div className="h-8 w-8 animate-spin rounded-full border-4 border-indigo-600 border-t-transparent" />
               </div>
             )}
@@ -391,8 +405,8 @@ export default function AvatarForge() {
         </section>
 
         {/* LAYER STACK */}
-        <aside className="bg-gray-50 w-64 rounded-xl my-10 border-l border-gray-200 p-4 overflow-y-auto">
-          <h2 className="text-lg font-medium mb-4">Selected Layers</h2>
+        <aside className="my-10 w-64 overflow-y-auto rounded-xl border-l border-gray-200 bg-gray-50 p-4">
+          <h2 className="mb-4 text-lg font-medium">Selected Layers</h2>
           <ul className="space-y-2 text-sm">
             {categories.map((cat) => (
               <li key={cat}>
@@ -403,7 +417,7 @@ export default function AvatarForge() {
           <div className="py-5">
             <button
               onClick={handleRandomize}
-              className="flex-none flex px-4 py-2 bg-gray-200 rounded-xl shadow text-sm"
+              className="flex flex-none rounded-xl bg-gray-200 px-4 py-2 text-sm shadow"
             >
               Randomize
             </button>
@@ -415,12 +429,24 @@ export default function AvatarForge() {
       <Footer>
         <>
           <div className="space-x-2">
-            {/* <button onClick={handleGenerate} className="px-4 py-2 bg-amber-500 text-white rounded-xl shadow text-sm">Generate AI Image</button> */}
+            {/* <button
+              onClick={handleGenerate}
+              className="rounded-xl bg-amber-500 px-4 py-2 text-sm text-white shadow"
+            >
+              Generate AI Image
+            </button> */}
+
+            <button
+              className="rounded-xl bg-gray-600 px-8 py-4 text-white shadow"
+              onClick={() => navigate('/')}
+            >
+              Back
+            </button>
           </div>
           <div className="space-x-2">
             {/* <button className="px-4 py-2 bg-gray-200 rounded-xl text-sm" disabled>Back</button> */}
             <button
-              className="px-8 py-4 text-white rounded-xl shadow bg-code-purple"
+              className="bg-code-purple rounded-xl px-8 py-4 text-white shadow"
               onClick={() => navigate('/styles-intro')}
             >
               Next
@@ -431,10 +457,10 @@ export default function AvatarForge() {
 
       {/* API KEY MODAL */}
       {showModal && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-2xl shadow-xl w-80">
-            <h2 className="text-lg font-semibold mb-3">OpenAI API Key</h2>
-            <p className="text-sm text-gray-600 mb-3">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="w-80 rounded-2xl bg-white p-6 shadow-xl">
+            <h2 className="mb-3 text-lg font-semibold">OpenAI API Key</h2>
+            <p className="mb-3 text-sm text-gray-600">
               Enter your secret key to enable AI image generation.
             </p>
             <input
@@ -442,18 +468,18 @@ export default function AvatarForge() {
               value={apiKey}
               onChange={(e) => setApiKey(e.target.value)}
               placeholder="sk-..."
-              className="w-full border rounded-lg px-3 py-2 mb-4"
+              className="mb-4 w-full rounded-lg border px-3 py-2"
             />
             <div className="flex justify-end space-x-2">
               <button
                 onClick={() => setShowModal(false)}
-                className="px-3 py-2 text-sm bg-gray-200 rounded-lg"
+                className="rounded-lg bg-gray-200 px-3 py-2 text-sm"
               >
                 Cancel
               </button>
               <button
                 onClick={handleSaveKey}
-                className="px-3 py-2 text-sm bg-code-purple text-white rounded-lg"
+                className="bg-code-purple rounded-lg px-3 py-2 text-sm text-white"
               >
                 Save
               </button>

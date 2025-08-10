@@ -1,69 +1,117 @@
 // App.tsx
-import { useState } from "react";
-import {
-  Tabs,
-  TabsList,
-  TabsTrigger,
-  TabsContent
-} from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
-import Editor from "@monaco-editor/react";
-import Footer from "./Footer";
+import { useState } from 'react';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { Button } from '@/components/ui/button';
+import Editor from '@monaco-editor/react';
+import Footer from './Footer';
 import CanvasVisualizer from './CanvasVisualizer';
-
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import {
+  IconArrowBack,
+  IconArrowLeft,
+  IconChevronUp,
+} from '@tabler/icons-react';
 
 export default function App() {
   const [showLeft, setShowLeft] = useState(true);
   const [showRight, setShowRight] = useState(true);
   const options = {
     minimap: {
-        enabled: false
+      enabled: false,
     },
     padding: {
-      top: 10
+      top: 10,
     },
     // automaticLayout: true,
     overviewRulerBorder: false,
-    overviewRulerLanes: 0
+    overviewRulerLanes: 0,
   };
 
   return (
     <>
-    <div className="grid grid-cols-[auto_1fr_auto] grid-rows-[1fr_auto] w-screen row-start-2 bg-gray-50 flex grow">
+      <div className="row-start-2 flex grid w-screen grow grid-cols-[auto_1fr_auto] grid-rows-[1fr_auto] overflow-hidden bg-gray-50">
+        {/* Instruction Panel */}
+        {showLeft ? (
+          <aside className="w-[250px] overflow-y-auto rounded-none bg-white p-4 shadow">
+            <div className="mb-2 flex items-center justify-between">
+              <h2 className="text-xl font-semibold">Tasks</h2>
+              <Button
+                size="sm"
+                variant="ghost"
+                onClick={() => setShowLeft(false)}
+              >
+                ❌
+              </Button>
+            </div>
+            <div className="text-sm text-gray-600">
+              <p className="">
+                Hint: the beat happens every 0.5 seconds.
+              </p>
+              <p>
+                ellipse = Ellipse((0.5, 0.5), width = 0.4, height = 0.4, color =
+                ‘green’)
+              </p>
 
-      {/* Instruction Panel */}
-      {showLeft ? (
-        <aside className="bg-white p-4 shadow rounded-none overflow-y-auto w-[250px]">
-          <div className="flex justify-between items-center mb-2">
-            <h2 className="text-xl font-semibold">Tasks</h2>
-            <Button size="sm" variant="ghost" onClick={() => setShowLeft(false)}>
-              ❌
-            </Button>
+              <p>
+                Replace ‘green’ with a color of your choice and observe how the
+                circle changes
+              </p>
+            </div>
+          </aside>
+        ) : (
+          <div className="flex items-start justify-center">
+            <button
+              className="sm mx-2 my-3 rounded bg-gray-300 px-4 py-2"
+              onClick={() => setShowLeft(true)}
+            >
+              📝 Tasks
+            </button>
           </div>
-          <p className="text-sm text-gray-600">Follow the steps to complete the coding task.</p>
-        </aside>
-      ) : (
-        <div className="flex items-start justify-center">
-          <button className="sm my-3 mx-2 rounded bg-gray-300 px-4 py-2" onClick={() => setShowLeft(true)}>
-          📝 Tasks
-          </button>
-        </div>
-      )}
+        )}
 
-      {/* Middle Column */}
-      <main className="grid grid-rows-[auto_1fr] ">
-
-        {/* Tabbed Code Editor */}
-        <section className="bg-white pt-4 shadow rounded-none overflow-hidden">
-          <Tabs defaultValue="you" className="gap-0 h-full">
-            <TabsList className="w-full justify-start rounded-none border-b bg-transparent p-0" >
-              <TabsTrigger className="relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none" value="you">You</TabsTrigger>
-              <TabsTrigger className="relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none" value="matt">Matt</TabsTrigger>
-              <TabsTrigger className="relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none" value="bryan">Bryan</TabsTrigger>
-              <TabsTrigger className="relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none" value="main">main.py</TabsTrigger>
-            </TabsList>
-            <TabsContent value="you">
-              <Editor defaultLanguage="python" options={options} defaultValue="import matplotlib.pyplot as plt
+        {/* Middle Column */}
+        <main className="grid grid-rows-[auto_1fr] overflow-y-auto">
+          {/* Tabbed Code Editor */}
+          <section className="overflow-hidden rounded-none bg-white pt-4 shadow">
+            <Tabs defaultValue="you" className="h-full gap-0">
+              <TabsList className="w-full justify-start rounded-none border-b bg-transparent p-0">
+                <TabsTrigger
+                  className="text-muted-foreground data-[state=active]:border-b-primary data-[state=active]:text-foreground relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pt-2 pb-3 font-semibold shadow-none transition-none data-[state=active]:shadow-none"
+                  value="you"
+                >
+                  You
+                </TabsTrigger>
+                <TabsTrigger
+                  className="text-muted-foreground data-[state=active]:border-b-primary data-[state=active]:text-foreground relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pt-2 pb-3 font-semibold shadow-none transition-none data-[state=active]:shadow-none"
+                  value="matt"
+                >
+                  Matt
+                </TabsTrigger>
+                <TabsTrigger
+                  className="text-muted-foreground data-[state=active]:border-b-primary data-[state=active]:text-foreground relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pt-2 pb-3 font-semibold shadow-none transition-none data-[state=active]:shadow-none"
+                  value="bryan"
+                >
+                  Bryan
+                </TabsTrigger>
+                <TabsTrigger
+                  className="text-muted-foreground data-[state=active]:border-b-primary data-[state=active]:text-foreground relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pt-2 pb-3 font-semibold shadow-none transition-none data-[state=active]:shadow-none"
+                  value="main"
+                >
+                  main.py
+                </TabsTrigger>
+              </TabsList>
+              <TabsContent value="you">
+                <Editor
+                  defaultLanguage="python"
+                  options={options}
+                  defaultValue="import matplotlib.pyplot as plt
 import numpy as np
 
 def draw_squiggly_ellipse(cx, cy, rx, ry, segments=100, amplitude=6):
@@ -79,10 +127,16 @@ def draw_squiggly_ellipse(cx, cy, rx, ry, segments=100, amplitude=6):
     plt.show()
 
 draw_squiggly_ellipse(0, 0, 120, 80)
-" theme="vs-dark" height="200px"/>
-            </TabsContent>
-            <TabsContent value="matt">
-              <Editor defaultLanguage="python" options={options} defaultValue="import matplotlib.pyplot as plt
+"
+                  theme="vs-dark"
+                  height="200px"
+                />
+              </TabsContent>
+              <TabsContent value="matt">
+                <Editor
+                  defaultLanguage="python"
+                  options={options}
+                  defaultValue="import matplotlib.pyplot as plt
 import numpy as np
 
 def draw_triangle(cx, cy, size):
@@ -101,10 +155,16 @@ def draw_triangle(cx, cy, size):
     plt.show()
 
 draw_triangle(0, 0, 140)
-" theme="vs-dark" height="200px"/>
-            </TabsContent>
-            <TabsContent value="bryan">
-              <Editor defaultLanguage="python" options={options} defaultValue="import matplotlib.pyplot as plt
+"
+                  theme="vs-dark"
+                  height="200px"
+                />
+              </TabsContent>
+              <TabsContent value="bryan">
+                <Editor
+                  defaultLanguage="python"
+                  options={options}
+                  defaultValue="import matplotlib.pyplot as plt
 import numpy as np
 
 def draw_star(cx, cy, spikes=5, outer=40, inner=20):
@@ -129,10 +189,16 @@ def draw_star(cx, cy, spikes=5, outer=40, inner=20):
     plt.show()
 
 draw_star(0, 0)
-" theme="vs-dark" height="200px"/>
-            </TabsContent>
-            <TabsContent value="main">
-              <Editor defaultLanguage="python" options={options} defaultValue="import pygame
+"
+                  theme="vs-dark"
+                  height="200px"
+                />
+              </TabsContent>
+              <TabsContent value="main">
+                <Editor
+                  defaultLanguage="python"
+                  options={options}
+                  defaultValue="import pygame
 import random
 import math
 from shapes.ellipse import draw_squiggly_ellipse
@@ -178,81 +244,124 @@ while running:
 
     for shape in shapes:
         x, y = shap
-" theme="vs-dark" height="200px"/>
-            </TabsContent>
-          </Tabs>
-        </section>
-
-        {/* Canvas Area */}
-        <section className="bg-white pt-4 shadow rounded-none flex items-center justify-center">
-        <Tabs defaultValue="canvas" className="gap-0 h-full w-full">
-            <TabsList className="w-full justify-start rounded-none border-b bg-transparent p-0" >
-              <TabsTrigger className="relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none" value="canvas">Canvas</TabsTrigger>
-              <TabsTrigger className="relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none" value="console">Console</TabsTrigger>
-            </TabsList>
-            <TabsContent value="canvas" className="">
-            <div className="w-full h-full bg-gray-700 rounded-none flex items-center justify-center text-gray-500">
-            <CanvasVisualizer/>
-          </div>
-            </TabsContent>
-            <TabsContent value="console">
-            <div className="w-full h-full bg-gray-900 rounded-none flex items-center justify-center text-gray-500">
-            Console Placeholder
-          </div>
-            </TabsContent>
+"
+                  theme="vs-dark"
+                  height="200px"
+                />
+              </TabsContent>
             </Tabs>
-          
-        </section>
+          </section>
 
-      </main>
+          {/* Canvas Area */}
+          <section className="flex rounded-none bg-white pt-4 shadow">
+            <Tabs defaultValue="canvas" className="h-full w-full gap-0">
+              <div class="justify flex">
+                <button className="bg-code-purple mx-3 rounded-lg px-4 py-1 text-white">
+                  Run
+                </button>
+                <TabsList className="flex grow-1 rounded-none border-b bg-transparent p-0">
+                  <TabsTrigger
+                    className="text-muted-foreground data-[state=active]:border-b-primary data-[state=active]:text-foreground relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pt-2 pb-3 font-semibold shadow-none transition-none data-[state=active]:shadow-none"
+                    value="canvas"
+                  >
+                    Canvas
+                  </TabsTrigger>
+                  <TabsTrigger
+                    className="text-muted-foreground data-[state=active]:border-b-primary data-[state=active]:text-foreground relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pt-2 pb-3 font-semibold shadow-none transition-none data-[state=active]:shadow-none"
+                    value="console"
+                  >
+                    Console
+                  </TabsTrigger>
+                </TabsList>
+              </div>
+              <TabsContent value="canvas" className="">
+                <div className="flex h-full w-full items-center justify-center rounded-none bg-gray-700 text-gray-500">
+                  <CanvasVisualizer />
+                </div>
+              </TabsContent>
+              <TabsContent value="console">
+                <div className="flex h-full w-full items-center justify-center rounded-none bg-gray-900 text-gray-500">
+                  Console Placeholder
+                </div>
+              </TabsContent>
+            </Tabs>
+          </section>
+        </main>
 
-      {/* Chat Interface */}
-      {showRight ? (
-        <aside className="bg-white p-4 shadow rounded-none flex flex-col w-[250px]">
-          <div className="flex justify-between items-center mb-2">
-            <Button size="sm" variant="ghost" onClick={() => setShowRight(false)}>
-              ❌
-            </Button>
-            <h2 className="text-xl font-semibold">Chat</h2>
-            
-          </div>
-          <div className="flex-1 overflow-y-auto mb-2 flex-col">
-            <div className="flex flex-row justify-end">
-              <p className="text-sm shrink text-gray-600 bg-gray-300 p-4 rounded-xl my-2">
-              Chat will appear here...
+        {/* Chat Interface */}
+        {showRight ? (
+          <aside className="flex w-[250px] flex-col overflow-y-auto rounded-none bg-white p-4 shadow">
+            <div className="mb-2 flex items-center justify-between">
+              <Button
+                size="sm"
+                variant="ghost"
+                onClick={() => setShowRight(false)}
+              >
+                ❌
+              </Button>
+              <h2 className="text-xl font-semibold">Chat</h2>
+            </div>
+            <div className="mb-2 flex-1 flex-col overflow-y-auto">
+              <div className="flex flex-row justify-end">
+                <p className="my-2 shrink rounded-xl bg-gray-300 p-4 text-sm text-gray-600">
+                  Chat will appear here...
+                </p>
+              </div>
+              <p className="my-2 inline-block shrink rounded-xl bg-gray-300 p-4 text-sm text-gray-600">
+                Chat will appear here...
+              </p>
+              <div className="flex flex-row justify-end">
+                <p className="my-2 shrink rounded-xl bg-gray-300 p-4 text-sm text-gray-600">
+                  Chat will appear here...
+                </p>
+              </div>
+              <p className="my-2 inline-block shrink rounded-xl bg-gray-300 p-4 text-sm text-gray-600">
+                Chat will appear here...
               </p>
             </div>
-            <p className="shrink text-sm text-gray-600 bg-gray-300 p-4 rounded-xl my-2 inline-block">Chat will appear here...</p>
-            <div className="flex flex-row justify-end">
-              <p className="text-sm shrink text-gray-600 bg-gray-300 p-4 rounded-xl my-2">
-              Chat will appear here...
-              </p>
-            </div>
-            <p className="shrink text-sm text-gray-600 bg-gray-300 p-4 rounded-xl my-2 inline-block">Chat will appear here...</p>
+            <input
+              type="text"
+              placeholder="Type a message..."
+              className="w-full rounded-md border p-2"
+            />
+          </aside>
+        ) : (
+          <div className="flex items-start justify-center">
+            <button
+              className="sm mx-2 my-3 rounded bg-gray-300 px-4 py-2"
+              onClick={() => setShowRight(true)}
+            >
+              💬 Chat
+            </button>
           </div>
-          <input
-            type="text"
-            placeholder="Type a message..."
-            className="border rounded-md p-2 w-full"
-          />
-        </aside>
-      ) : (
-        <div className="flex items-start justify-center">
-          <button className="sm my-3 mx-2 rounded bg-gray-300 px-4 py-2"  onClick={() => setShowRight(true)}>
-          💬 Chat
+        )}
+
+        <div className="col-span-full row-start-2 flex w-full justify-between bg-gray-200 px-3 py-2">
+          <button className="bg-code-purple align-center h-12 w-12 rounded-4xl text-center text-white">
+            <IconArrowLeft className="inline-block" />
+          </button>
+          <span>
+          Unit 1: Programming Basics & Data
+          <DropdownMenu>
+            <DropdownMenuTrigger className="rounded-lg border-1 px-4 py-2">
+            ◆ ⏺︎ <span>3</span>&nbsp;
+              <IconChevronUp className="inline" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>Profile</DropdownMenuItem>
+              <DropdownMenuItem>Billing</DropdownMenuItem>
+              <DropdownMenuItem>Team</DropdownMenuItem>
+              <DropdownMenuItem>Subscription</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          </span>
+          <button className="bg-code-purple rounded-lg px-4 py-3 text-white">
+            I'm Done
           </button>
         </div>
-      )}
-
-    <div className="row-start-2 flex justify-end w-full col-span-full py-2 px-3 bg-gray-200">
-    <button
-        className="bg-code-purple text-white px-4 py-3 rounded-lg"
-        >
-            I'm Done
-    </button>
-    </div>
-    </div>
-    
+      </div>
     </>
   );
 }

@@ -12,16 +12,17 @@ export default function Footer({ title, resetSvg, avatar, children }) {
     <>
     {avatar && svg && (
         <span
-            onClick={() => navigate('/')}
+            // onClick={() => navigate('/')}
             className="ml-6 flex h-30 w-30 object-fit border-gray-800 bg-blue-200 border rounded-full overflow-hidden fixed bottom-30 z-200 right-5 shadow-md"
         >
             {parse(svg)}
         </span>
         )}
-      <div className="row-start-1 p-8 border-b border-b-1 border-gray-300">
+      <div className="row-start-1 p-8 px-10 border-b border-b-1 border-gray-300">
         <h1 className="text-3xl flex flex-row items-center">{title}</h1>
         {children}
       </div>
+      
     </>
   );
 }
