@@ -8,9 +8,9 @@ export default function CodeMateIntro() {
   return (
     <>
       <title>Intro to Learning Styles</title>
-      <Header title="Welcome! Your Code Mate Companion" avatar={false}>
-        {/* <small className="text-sm">You can change this later</small> */}
-      </Header>
+      {/* <Header title="Welcome! Your Code Mate Companion" avatar={false}>
+        
+      </Header> */}
       <div className="center row-start-2 flex grid grow-1 grid-cols-12 flex-col content-center items-center overflow-y-scroll text-left">
         <div className="col-span-8 col-start-3 mb-30 flex flex-col self-center rounded-xl bg-gray-200 p-12">
           {/* <h2 className="text-xl font-bold"></h2> */}
@@ -24,6 +24,7 @@ export default function CodeMateIntro() {
             <li>In-lesson character for your learning journey</li>
             <li>A learning companion</li>
           </ul>
+          <p>Select the Avatar that resonates with you, you can change it at any time</p>
           {/* <p><a className="mt-3 inline-block px-12 py-4 bg-indigo-600 text-white rounded-xl shadow bg-primary" onClick={()=>navigate('/styles')}>Get started</a></p> */}
         </div>
       </div>

@@ -21,9 +21,9 @@ ul{
   list-style:disc;
   font-size: var(--text-l);
   padding-left: calc(var(--spacing)*6);
-  li{
-    margin: .5rem 0;
-  }
+}
+ul li {
+  margin: .5rem 0;
 }
 @custom-variant dark (&:is(.dark *));
 #root {
